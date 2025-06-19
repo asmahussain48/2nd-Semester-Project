@@ -127,7 +127,6 @@ this below code is helpfull
         registerButton.setBorder(BorderFactory.createEtchedBorder());
         add(registerButton, gbc);
 
-
         // Login link
         gbc.gridy++;
         JLabel loginLabel = new JLabel("<html><center>Already have an account? <a href='' style='color:#0066CC;text-decoration:none'>Sign in here</a></center></html>");

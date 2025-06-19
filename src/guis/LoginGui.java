@@ -120,7 +120,7 @@ public class LoginGui extends JFrame {
             }
         });
 
-        // Register label click event
+        // Register label click event to open the login page
         registerLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
