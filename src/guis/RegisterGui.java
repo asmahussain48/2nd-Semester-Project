@@ -1,14 +1,21 @@
 package guis;
-
-import db_objs.MyJDBC;
+import db_objs.MyJDBC; // for connecting to database class
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.*;
+/*
+Mouse events let you track when a mouse is pressed, released,
+clicked, moved, dragged, when it enters a component, when it exits
+ and when a mouse wheel is moved.
+ */
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class RegisterGui extends JFrame {
-
+    public static void main(String[] args) {
+        new RegisterGui();
+    }
     public RegisterGui() {
         setTitle("Mobile App Store");
         setSize(700, 700);
@@ -17,18 +24,25 @@ public class RegisterGui extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
 
-        getContentPane().setBackground(Color.WHITE); // Set white background
+        getContentPane().setBackground(Color.WHITE);
+        //Or
+//        getContentPane().setBackground(new Color(250,250,250));
+        // is used in Java Swing to change the background color of the main content area
+        // (the area where components like buttons, labels, etc., are added) to white.
         // Set Icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/login.png"));
+        //getResourse for the login.png file in project
+        // ImageIcon(C:/images/login.png) for directly given it path but not for production will issue
+        // if you share the file with others
         setIconImage(icon.getImage());
-
         addGuiComponents();
-
         setVisible(true);
     }
 
     private void addGuiComponents() {
+        //It defines how each component is placed and behaves inside a grid cell.
         GridBagConstraints gbc = new GridBagConstraints();
+
         gbc.insets = new Insets(15, 20, 15, 20);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -42,6 +56,13 @@ public class RegisterGui extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = y++;
         gbc.anchor = GridBagConstraints.CENTER;
+        /*
+        When the component does not fill the entire grid cell (because of fill),
+        anchor decides where to "stick" it:
+        Top-left?
+        Center?
+        Bottom-right? etc.
+         */
         add(titleLabel, gbc);
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridwidth = 1;
@@ -54,7 +75,13 @@ public class RegisterGui extends JFrame {
         JTextField usernameField = new JTextField(25);
         JPasswordField passwordField = new JPasswordField(25);
         JPasswordField rePasswordField = new JPasswordField(25);
+/* instead of
+JLabel nameLabel = new JLabel("Full Name:");
+panel.add(nameLabel, gbc);
+panel.add(nameField, gbc);
+this below code is helpfull
 
+ */
         addLabelAndField("Full Name:", nameField, gbc, y++);
         addLabelAndField("Phone Number:", phoneField, gbc, y++);
         addLabelAndField("Address:", addressField, gbc, y++);
@@ -89,8 +116,8 @@ public class RegisterGui extends JFrame {
         gbc.gridy = y++;
         gbc.gridwidth = 150;
         // Prevent the layout from stretching the button
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE; // {                   } length fill
+        gbc.anchor = GridBagConstraints.CENTER;// postition of Register at center west etc
 
         gbc.gridwidth = 1;
         registerButton.setBackground(new Color(220, 20, 60)); // Crimson red
@@ -205,6 +232,8 @@ public class RegisterGui extends JFrame {
 
             if (MyJDBC.register(username, email, password, fullName, phone, address)) {
                 this.dispose();
+                //Close the current window (JFrame) and release its resources
+                // You want to move from one window to another (like going from Login → Dashboard).
                 LoginGui loginGui = new LoginGui();
                 loginGui.setVisible(true);
                 JOptionPane.showMessageDialog(loginGui, "Registered Account Successfully!");
