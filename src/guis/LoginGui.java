@@ -143,7 +143,7 @@ public class LoginGui extends JFrame {
 
         // Back button returns to LoginGui if needed (currently commented out)
         mobilePanel.getBackToMainMenuButton().addActionListener(ev -> {
-            mobileFrame.dispose();
+            mobileFrame.dispose(); //close the mobileFrame
             // LoginGui.this.setVisible(true); // Uncomment if you want to reopen login page
         });
     }

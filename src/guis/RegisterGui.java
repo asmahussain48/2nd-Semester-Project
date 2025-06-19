@@ -244,8 +244,8 @@ this below code is helpfull
         loginLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                RegisterGui.this.dispose();
-                new LoginGui().setVisible(true);
+                RegisterGui.this.dispose();//close the Register Frame
+                new LoginGui().setVisible(true); //Open the Login Frame
             }
         });
     }
